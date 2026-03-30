@@ -5,13 +5,9 @@ import fr.esgi.avis.dto.AvisDtoIn;
 import fr.esgi.avis.dto.AvisDtoOut;
 import fr.esgi.avis.dto.JoueurDtoIn;
 import fr.esgi.avis.dto.JoueurDtoOut;
-import fr.esgi.avis.entity.Avis;
-import fr.esgi.avis.entity.Jeu;
-import fr.esgi.avis.entity.Joueur;
+import fr.esgi.avis.entity.*;
 import fr.esgi.avis.mapper.JoueurMapper;
-import fr.esgi.avis.repository.AvisRepository;
-import fr.esgi.avis.repository.JeuRepository;
-import fr.esgi.avis.repository.JoueurEntityRepository;
+import fr.esgi.avis.repository.*;
 import fr.esgi.avis.use_case.JoueurUseCase;
 import org.springframework.stereotype.Service;
 
@@ -32,46 +28,42 @@ public class JoueurUseCaseImpl implements JoueurUseCase {
 
     @Override
     public JoueurDtoOut creerJoueur(JoueurDtoIn joueurDtoIn) {
-        if (joueurRepository.existsByEmail(joueurDtoIn.email())) {
+        if (joueurRepository.existsByEmail((joueurDtoIn.getEmail()))) {
             throw new RuntimeException("Un joueur avec cet email existe déjà : " + joueurDtoIn.email());
         }
 
-        Joueur joueur = new Joueur();
-        joueur.setPseudo(joueurDtoIn.pseudo());
-        joueur.setEmail(joueurDtoIn.email());
-        joueur.setMotDePasse(joueurDtoIn.motDePasse()); // 🔒 pense à encoder avec BCrypt en prod
-
-        Joueur saved = joueurRepository.save(joueur);
+        JoueurEntity joueurEntity = joueurMapper.toEntity(joueurDtoIn);
+        JoueurEntity saved = joueurRepository.save(joueurEntity);
         return JoueurMapper.toJoueurDtoOut(saved);
     }
 
     @Override
     public AvisDtoOut redigerAvis(AvisDtoIn avisDtoIn) {
-        Joueur joueur = joueurRepository.findById(avisDtoIn.joueurId())
+        JoueurEntity joueur = joueurRepository.findById(avisDtoIn.getJoueurId())
                 .orElseThrow(() -> new RuntimeException("Joueur introuvable : " + avisDtoIn.joueurId()));
 
-        Jeu jeu = jeuRepository.findById(avisDtoIn.jeuId())
+        JeuEntity jeu = jeuRepository.findById(avisDtoIn.getJeuId())
                 .orElseThrow(() -> new RuntimeException("Jeu introuvable : " + avisDtoIn.jeuId()));
 
-        Avis avis = new Avis();
-        avis.setContenu(avisDtoIn.contenu());
-        avis.setNote(avisDtoIn.note());
+        AvisEntity avis = new AvisEntity();
+        avis.setDescription(avisDtoIn.getDescription());
+        avis.setNote(avisDtoIn.getNote());
         avis.setJoueur(joueur);
         avis.setJeu(jeu);
 
-        Avis saved = avisRepository.save(avis);
-        return JoueurMapper.toAvisDtoOut(saved);
+        AvisEntity saved = avisRepository.save(avis);
+        return avisMapper.toDto(saved);
     }
 
     @Override
     public AvisDtoOut modifierAvis(AvisDtoIn avisDtoIn) {
-        Avis avis = avisRepository.findById(avisDtoIn.id())
+        AvisEntity avis = avisRepository.findById(avisDtoIn.getId())
                 .orElseThrow(() -> new RuntimeException("Avis introuvable : " + avisDtoIn.id()));
 
-        avis.setContenu(avisDtoIn.contenu());
-        avis.setNote(avisDtoIn.note());
+        avis.setDescription(avisDtoIn.getDescription());
+        avis.setNote(avisDtoIn.getNote());
 
-        Avis saved = avisRepository.save(avis);
-        return JoueurMapper.toAvisDtoOut(saved);
+        AvisEntity saved = avisRepository.save(avis);
+        return avisMapper.toDto(saved);
     }
 }

@@ -9,6 +9,10 @@ import fr.esgi.avis.mapper.AvisMapper;
 import fr.esgi.avis.mapper.EditeurMapper;
 import fr.esgi.avis.mapper.JeuMapper;
 import fr.esgi.avis.mapper.ModerateurMapper;
+import fr.esgi.avis.repository.AvisEntityRepository;
+import fr.esgi.avis.repository.EditeurEntityRepository;
+import fr.esgi.avis.repository.JeuEntityRepository;
+import fr.esgi.avis.repository.ModerateurEntityRepository;
 import fr.esgi.avis.use_case.ModerateurUseCase;
 import jakarta.persistence.EntityNotFoundException;
 

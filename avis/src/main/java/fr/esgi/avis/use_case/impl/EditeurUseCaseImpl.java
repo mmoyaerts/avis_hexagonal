@@ -5,7 +5,9 @@ import fr.esgi.avis.dto.EditeurDtoIn;
 import fr.esgi.avis.dto.EditeurDtoOut;
 import fr.esgi.avis.dto.JeuDtoOut;
 import fr.esgi.avis.entity.Editeur;
+import fr.esgi.avis.entity.EditeurEntity;
 import fr.esgi.avis.mapper.EditeurMapper;
+import fr.esgi.avis.repository.EditeurEntityRepository;
 import fr.esgi.avis.repository.EditeurRepository;
 import fr.esgi.avis.use_case.EditeurUseCase;
 import org.springframework.stereotype.Service;
@@ -23,7 +25,7 @@ public class EditeurUseCaseImpl implements EditeurUseCase {
 
     @Override
     public List<JeuDtoOut> recuperJeuxParEditeur(EditeurDtoIn editeurDtoIn) {
-        Editeur editeur = editeurRepository.findById(editeurDtoIn.id())
+        EditeurEntity editeur = editeurRepository.findById(editeurDtoIn.getId())
                 .orElseThrow(() -> new RuntimeException("Éditeur introuvable avec l'id : " + editeurDtoIn.id()));
 
         return editeur.getJeux()
