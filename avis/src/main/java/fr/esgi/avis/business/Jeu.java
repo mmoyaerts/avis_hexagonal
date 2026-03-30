@@ -6,12 +6,14 @@ import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import java.time.LocalDate;
 import java.util.List;
 
 @Data
+@NoArgsConstructor
 public class Jeu {
     private Long id;
 
