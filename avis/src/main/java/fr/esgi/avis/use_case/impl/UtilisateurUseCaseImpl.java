@@ -1,6 +1,7 @@
 // UtilisateurUseCaseImpl.java
 package fr.esgi.avis.use_case.impl;
 
+import fr.esgi.avis.business.Utilisateur;
 import fr.esgi.avis.dto.*;
 import fr.esgi.avis.entity.Avatar;
 import fr.esgi.avis.entity.Utilisateur;
@@ -15,11 +16,11 @@ import java.util.List;
 @Service
 public class UtilisateurUseCaseImpl implements UtilisateurUseCase {
 
-    private final UtilisateurRepository utilisateurRepository;
-    private final AvatarRepository avatarRepository;
+    private final UtilisateurEntityRepository utilisateurRepository;
+    private final AvatarEntityRepository avatarRepository;
 
-    public UtilisateurUseCaseImpl(UtilisateurRepository utilisateurRepository,
-                                  AvatarRepository avatarRepository) {
+    public UtilisateurUseCaseImpl(UtilisateurEntityRepository utilisateurRepository,
+                                  AvatarEntityRepository avatarRepository) {
         this.utilisateurRepository = utilisateurRepository;
         this.avatarRepository = avatarRepository;
     }

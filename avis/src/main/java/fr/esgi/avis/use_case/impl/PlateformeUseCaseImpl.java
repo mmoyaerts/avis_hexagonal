@@ -14,9 +14,9 @@ import java.util.List;
 @Service
 public class PlateformeUseCaseImpl implements PlateformeUseCase {
 
-    private final PlateformeRepository plateformeRepository;
+    private final PlateformeEntityRepository plateformeRepository;
 
-    public PlateformeUseCaseImpl(PlateformeRepository plateformeRepository) {
+    public PlateformeUseCaseImpl(PlateformeEntityRepository plateformeRepository) {
         this.plateformeRepository = plateformeRepository;
     }
 

@@ -11,20 +11,20 @@ import fr.esgi.avis.entity.Joueur;
 import fr.esgi.avis.mapper.JoueurMapper;
 import fr.esgi.avis.repository.AvisRepository;
 import fr.esgi.avis.repository.JeuRepository;
-import fr.esgi.avis.repository.JoueurRepository;
+import fr.esgi.avis.repository.JoueurEntityRepository;
 import fr.esgi.avis.use_case.JoueurUseCase;
 import org.springframework.stereotype.Service;
 
 @Service
 public class JoueurUseCaseImpl implements JoueurUseCase {
 
-    private final JoueurRepository joueurRepository;
-    private final AvisRepository avisRepository;
-    private final JeuRepository jeuRepository;
+    private final JoueurEntityRepository joueurRepository;
+    private final AvisEntityRepository avisRepository;
+    private final JeuEntityRepository jeuRepository;
 
-    public JoueurUseCaseImpl(JoueurRepository joueurRepository,
-                             AvisRepository avisRepository,
-                             JeuRepository jeuRepository) {
+    public JoueurUseCaseImpl(JoueurEntityRepository joueurRepository,
+                             AvisEntityRepository avisRepository,
+                             JeuEntityRepository jeuRepository) {
         this.joueurRepository = joueurRepository;
         this.avisRepository = avisRepository;
         this.jeuRepository = jeuRepository;

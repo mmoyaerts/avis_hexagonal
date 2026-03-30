@@ -15,9 +15,9 @@ import java.util.List;
 @Service
 public class EditeurUseCaseImpl implements EditeurUseCase {
 
-    private final EditeurRepository editeurRepository;
+    private final EditeurEntityRepository editeurRepository;
 
-    public EditeurUseCaseImpl(EditeurRepository editeurRepository) {
+    public EditeurUseCaseImpl(EditeurEntityRepository editeurRepository) {
         this.editeurRepository = editeurRepository;
     }
 

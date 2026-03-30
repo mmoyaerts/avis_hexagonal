@@ -14,8 +14,7 @@ import lombok.Setter;
 import java.util.List;
 
 @NoArgsConstructor
-@Getter
-@Setter
+@Data
 public abstract class Utilisateur {
 
     protected Long id;
