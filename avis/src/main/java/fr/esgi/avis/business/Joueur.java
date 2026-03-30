@@ -14,6 +14,4 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = true)
 public class Joueur extends Utilisateur{
     private LocalDate dateDeNaissance;
-
-    private Avatar avatar;
 }

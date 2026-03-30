@@ -1,5 +1,6 @@
 package fr.esgi.avis.use_case;
 
+import fr.esgi.avis.DTO.*;
 import fr.esgi.avis.business.Avis;
 import fr.esgi.avis.business.Editeur;
 import fr.esgi.avis.business.Jeu;
@@ -10,12 +11,10 @@ import java.util.List;
 
 public interface ModerateurUseCase {
 
-    Avis modererAvis(Avis avis, Moderateur moderateur);
+    AvisDtoOut modererAvis(AvisDtoIn avis, ModerateurDtoIn moderateur);
 
-    Jeu ajouterJeu(Jeu jeu);
+    JeuDtoOut ajouterJeu(JeuDtoIn jeu);
 
-    Moderateur creerModerateur(Moderateur moderateur);
-
-    Moderateur creerEditeur(Editeur editeur);
+    EditeurDtoOut creerEditeur(EditeurDtoIn editeur);
 
 }

@@ -1,5 +1,9 @@
 package fr.esgi.avis.use_case;
 
+import fr.esgi.avis.DTO.AvisDtoIn;
+import fr.esgi.avis.DTO.AvisDtoOut;
+import fr.esgi.avis.DTO.JoueurDtoIn;
+import fr.esgi.avis.DTO.JoueurDtoOut;
 import fr.esgi.avis.business.Avis;
 import fr.esgi.avis.business.Joueur;
 
@@ -7,9 +11,9 @@ import java.util.List;
 
 public interface JoueurUseCase {
 
-    Avis redigerAvis(Avis avis);
+    AvisDtoOut redigerAvis(AvisDtoIn avis);
 
-    Avis modifierAvis(Avis avis);
+    AvisDtoOut modifierAvis(AvisDtoIn avis);
 
-    Joueur creerJoueur(Joueur joueur);
+    JoueurDtoOut creerJoueur(JoueurDtoIn joueur);
 }

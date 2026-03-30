@@ -1,16 +1,19 @@
 package fr.esgi.avis.use_case;
 
+import fr.esgi.avis.DTO.AvisDtoOut;
+import fr.esgi.avis.DTO.JeuDtoIn;
+import fr.esgi.avis.DTO.JeuDtoOut;
 import fr.esgi.avis.business.Avis;
 import fr.esgi.avis.business.Jeu;
 
 import java.util.List;
 
 public interface JeuUseCase {
-    List<Jeu> recupererJeux();
+    List<JeuDtoOut> recupererJeux();
 
-    Jeu recupererJeu(Long id);
+    JeuDtoOut recupererJeu(Long id);
 
-    List<Jeu> recupererParNom(String nom);
+    List<JeuDtoOut> recupererParNom(String nom);
 
-    List<Avis> recupererAvisPourUnJeu(Jeu jeu);
+    List<AvisDtoOut> recupererAvisPourUnJeu(JeuDtoIn jeu);
 }
