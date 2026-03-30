@@ -4,11 +4,13 @@ import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Range;
 
 import java.time.LocalDateTime;
 
 @Data
+@NoArgsConstructor
 public class Avis {
     private Long id;
 

@@ -1,10 +1,12 @@
 package fr.esgi.avis.business;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
 @Data
+@NoArgsConstructor
 public class Genre {
     private Long id;
 
