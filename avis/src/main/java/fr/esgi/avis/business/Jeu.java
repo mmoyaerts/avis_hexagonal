@@ -34,4 +34,6 @@ public class Jeu {
     private float prix;
 
     private Classification classification;
+
+    private List<Avis> avis;
 }

@@ -16,6 +16,4 @@ public class Joueur extends Utilisateur{
     private LocalDate dateDeNaissance;
 
     private Avatar avatar;
-
-    private List<Avis> avis;
 }
