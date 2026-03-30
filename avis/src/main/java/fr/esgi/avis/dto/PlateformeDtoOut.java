@@ -1,4 +1,4 @@
-package fr.esgi.avis.DTO;
+package fr.esgi.avis.dto;
 
 import fr.esgi.avis.business.Plateforme;
 import lombok.Value;
@@ -10,7 +10,7 @@ import java.util.List;
  * DTO for {@link Plateforme}
  */
 @Value
-public class PlateformeDtoIn implements Serializable {
+public class PlateformeDtoOut implements Serializable {
     Long id;
     String nom;
     List<Long> jeuxIds;

@@ -1,18 +1,16 @@
-package fr.esgi.avis.DTO;
+package fr.esgi.avis.dto;
 
-import fr.esgi.avis.business.Joueur;
+import fr.esgi.avis.business.Utilisateur;
 import lombok.Value;
 
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.util.List;
 
 /**
- * DTO for {@link Joueur}
+ * DTO for {@link Utilisateur}
  */
 @Value
-public class JoueurDtoIn implements Serializable {
-    LocalDate dateDeNaissance;
+public class UtilisateurDtoIn implements Serializable {
     Long id;
     String pseudo;
     String email;

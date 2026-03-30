@@ -1,10 +1,8 @@
 package fr.esgi.avis.use_case;
 
-import fr.esgi.avis.DTO.EditeurDtoIn;
-import fr.esgi.avis.DTO.EditeurDtoOut;
-import fr.esgi.avis.DTO.JeuDtoOut;
-import fr.esgi.avis.business.Editeur;
-import fr.esgi.avis.business.Jeu;
+import fr.esgi.avis.dto.EditeurDtoIn;
+import fr.esgi.avis.dto.EditeurDtoOut;
+import fr.esgi.avis.dto.JeuDtoOut;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package fr.esgi.avis.DTO;
+package fr.esgi.avis.dto;
 
 import fr.esgi.avis.business.Avis;
 import lombok.Value;

@@ -1,13 +1,6 @@
 package fr.esgi.avis.use_case;
 
-import fr.esgi.avis.DTO.*;
-import fr.esgi.avis.business.Avis;
-import fr.esgi.avis.business.Editeur;
-import fr.esgi.avis.business.Jeu;
-import fr.esgi.avis.business.Moderateur;
-import org.springframework.boot.Banner;
-
-import java.util.List;
+import fr.esgi.avis.dto.*;
 
 public interface ModerateurUseCase {
 

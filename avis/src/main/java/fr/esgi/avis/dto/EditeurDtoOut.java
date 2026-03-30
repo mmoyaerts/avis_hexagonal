@@ -1,4 +1,4 @@
-package fr.esgi.avis.DTO;
+package fr.esgi.avis.dto;
 
 import fr.esgi.avis.business.Editeur;
 import lombok.Value;
@@ -10,7 +10,7 @@ import java.util.List;
  * DTO for {@link Editeur}
  */
 @Value
-public class EditeurDtoIn implements Serializable {
+public class EditeurDtoOut implements Serializable {
     Long id;
     String nom;
     String logo;

@@ -1,9 +1,6 @@
 package fr.esgi.avis.use_case;
 
-import fr.esgi.avis.DTO.*;
-import fr.esgi.avis.business.Avatar;
-import fr.esgi.avis.business.Avis;
-import fr.esgi.avis.business.Utilisateur;
+import fr.esgi.avis.dto.*;
 
 import java.util.List;
 
