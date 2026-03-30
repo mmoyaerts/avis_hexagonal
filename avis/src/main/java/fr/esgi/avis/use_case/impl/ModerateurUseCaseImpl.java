@@ -5,6 +5,10 @@ import fr.esgi.avis.business.Editeur;
 import fr.esgi.avis.business.Jeu;
 import fr.esgi.avis.business.Moderateur;
 import fr.esgi.avis.dto.*;
+import fr.esgi.avis.mapper.AvisMapper;
+import fr.esgi.avis.mapper.EditeurMapper;
+import fr.esgi.avis.mapper.JeuMapper;
+import fr.esgi.avis.mapper.ModerateurMapper;
 import fr.esgi.avis.use_case.ModerateurUseCase;
 import jakarta.persistence.EntityNotFoundException;
 

@@ -2,6 +2,7 @@ package fr.esgi.avis.use_case.impl;
 
 import fr.esgi.avis.business.Avis;
 import fr.esgi.avis.dto.AvisDtoOut;
+import fr.esgi.avis.mapper.AvisMapper;
 import fr.esgi.avis.use_case.AvisUseCase;
 import jakarta.persistence.EntityNotFoundException;
 

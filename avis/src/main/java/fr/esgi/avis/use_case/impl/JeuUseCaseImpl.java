@@ -4,6 +4,8 @@ import fr.esgi.avis.business.Jeu;
 import fr.esgi.avis.dto.AvisDtoOut;
 import fr.esgi.avis.dto.JeuDtoIn;
 import fr.esgi.avis.dto.JeuDtoOut;
+import fr.esgi.avis.mapper.AvisMapper;
+import fr.esgi.avis.mapper.JeuMapper;
 import fr.esgi.avis.use_case.JeuUseCase;
 import jakarta.persistence.EntityNotFoundException;
 
