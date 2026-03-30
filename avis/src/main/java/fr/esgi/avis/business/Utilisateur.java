@@ -11,6 +11,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @NoArgsConstructor
 @Getter
 @Setter
@@ -25,4 +27,6 @@ public abstract class Utilisateur {
     protected String motDePasse;
 
     private Avatar avatar;
+
+    private List<Avis> avis;
 }
