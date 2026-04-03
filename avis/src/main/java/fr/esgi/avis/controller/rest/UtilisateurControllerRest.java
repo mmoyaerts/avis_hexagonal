@@ -22,9 +22,9 @@ public class UtilisateurControllerRest {
 
     // 🔐 LOGIN
     @PostMapping("/login")
-    public ResponseEntity<UtilisateurDtoOut> login(@RequestBody UtilisateurDtoIn user) {
+    public ResponseEntity<UtilisateurDtoOut> login(@RequestBody LoginDtoIn loginDtoIn) {
         return ResponseEntity.ok(
-                utilisateurUseCase.recupererUtilisateur(user.getEmail(),user.getMotDePasse())
+                utilisateurUseCase.recupererUtilisateur(loginDtoIn.email(), loginDtoIn.motDePasse())
         );
     }
 

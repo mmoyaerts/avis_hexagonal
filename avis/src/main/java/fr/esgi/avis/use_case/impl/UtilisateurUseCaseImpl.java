@@ -27,7 +27,7 @@ public class UtilisateurUseCaseImpl implements UtilisateurUseCase {
     @Override
     public UtilisateurDtoOut recupererUtilisateur(String email, String motDePasse) {
         return utilisateurPort.findByEmailAndMotDePasse(email, motDePasse)
-                .orElseThrow(() -> new RuntimeException("Email ou mot de passe incorrect"));
+                .orElseThrow(() -> new RuntimeException("Email ou mot de passe incorrect" + email + motDePasse));
     }
 
     @Override
