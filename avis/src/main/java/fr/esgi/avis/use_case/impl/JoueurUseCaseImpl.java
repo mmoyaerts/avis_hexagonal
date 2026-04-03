@@ -1,69 +1,54 @@
-// JoueurUseCaseImpl.java
 package fr.esgi.avis.use_case.impl;
 
-import fr.esgi.avis.dto.AvisDtoIn;
-import fr.esgi.avis.dto.AvisDtoOut;
-import fr.esgi.avis.dto.JoueurDtoIn;
-import fr.esgi.avis.dto.JoueurDtoOut;
-import fr.esgi.avis.entity.*;
+import fr.esgi.avis.business.Avis;
+import fr.esgi.avis.business.Jeu;
+import fr.esgi.avis.business.Joueur;
+import fr.esgi.avis.dto.*;
+import fr.esgi.avis.mapper.AvisMapper;
 import fr.esgi.avis.mapper.JoueurMapper;
-import fr.esgi.avis.repository.*;
+import fr.esgi.avis.port.AvisPort;
+import fr.esgi.avis.port.JeuPort;
+import fr.esgi.avis.port.JoueurPort;
 import fr.esgi.avis.use_case.JoueurUseCase;
 import org.springframework.stereotype.Service;
 
-@Service
 public class JoueurUseCaseImpl implements JoueurUseCase {
 
-    private final JoueurEntityRepository joueurRepository;
-    private final AvisEntityRepository avisRepository;
-    private final JeuEntityRepository jeuRepository;
+    private final JoueurPort joueurPort; // ✅ plus de repository
+    private final AvisPort avisPort;     // ✅ plus de repository
+    private final JeuPort jeuPort;       // ✅ plus de repository
 
-    public JoueurUseCaseImpl(JoueurEntityRepository joueurRepository,
-                             AvisEntityRepository avisRepository,
-                             JeuEntityRepository jeuRepository) {
-        this.joueurRepository = joueurRepository;
-        this.avisRepository = avisRepository;
-        this.jeuRepository = jeuRepository;
+    public JoueurUseCaseImpl(JoueurPort joueurPort, AvisPort avisPort, JeuPort jeuPort) {
+        this.joueurPort = joueurPort;
+        this.avisPort = avisPort;
+        this.jeuPort = jeuPort;
     }
 
     @Override
     public JoueurDtoOut creerJoueur(JoueurDtoIn joueurDtoIn) {
-        if (joueurRepository.existsByEmail((joueurDtoIn.getEmail()))) {
-            throw new RuntimeException("Un joueur avec cet email existe déjà : " + joueurDtoIn.email());
+        if (joueurPort.existsByEmail(joueurDtoIn.getEmail())) {
+            throw new RuntimeException("Un joueur avec cet email existe déjà : " + joueurDtoIn.getEmail());
         }
 
-        JoueurEntity joueurEntity = JoueurMapper.toJoueur(joueurDtoIn);
-        JoueurEntity saved = joueurRepository.save(joueurEntity);
-        return JoueurMapper.toJoueurDtoOut(saved);
+        return joueurPort.save(joueurDtoIn);
     }
 
     @Override
     public AvisDtoOut redigerAvis(AvisDtoIn avisDtoIn) {
-        JoueurEntity joueur = joueurRepository.findById(avisDtoIn.getJoueurId())
-                .orElseThrow(() -> new RuntimeException("Joueur introuvable : " + avisDtoIn.joueurId()));
+        JoueurDtoOut joueurDtoOut = joueurPort.findById(avisDtoIn.getJoueurId())
+                .orElseThrow(() -> new RuntimeException("Joueur introuvable : " + avisDtoIn.getJoueurId()));
 
-        JeuEntity jeu = jeuRepository.findById(avisDtoIn.getJeuId())
-                .orElseThrow(() -> new RuntimeException("Jeu introuvable : " + avisDtoIn.jeuId()));
+        JeuDtoOut jeuDtoOut = jeuPort.findById(avisDtoIn.getJeuId())
+                .orElseThrow(() -> new RuntimeException("Jeu introuvable : " + avisDtoIn.getJeuId()));
 
-        AvisEntity avis = new AvisEntity();
-        avis.setDescription(avisDtoIn.getDescription());
-        avis.setNote(avisDtoIn.getNote());
-        avis.setJoueur(joueur);
-        avis.setJeu(jeu);
-
-        AvisEntity saved = avisRepository.save(avis);
-        return avisMapper.toDto(saved);
+        return avisPort.save(avisDtoIn);
     }
 
     @Override
     public AvisDtoOut modifierAvis(AvisDtoIn avisDtoIn) {
-        AvisEntity avis = avisRepository.findById(avisDtoIn.getId())
-                .orElseThrow(() -> new RuntimeException("Avis introuvable : " + avisDtoIn.id()));
+        AvisDtoOut avisExiste = avisPort.findById(avisDtoIn.getId())
+                .orElseThrow(() -> new RuntimeException("Avis introuvable : " + avisDtoIn.getId()));
 
-        avis.setDescription(avisDtoIn.getDescription());
-        avis.setNote(avisDtoIn.getNote());
-
-        AvisEntity saved = avisRepository.save(avis);
-        return avisMapper.toDto(saved);
+        return avisPort.save(avisDtoIn);
     }
 }

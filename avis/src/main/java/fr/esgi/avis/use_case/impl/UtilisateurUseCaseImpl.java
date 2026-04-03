@@ -1,63 +1,61 @@
-// UtilisateurUseCaseImpl.java
 package fr.esgi.avis.use_case.impl;
 
+import fr.esgi.avis.business.Avatar;
 import fr.esgi.avis.business.Utilisateur;
 import fr.esgi.avis.dto.*;
-import fr.esgi.avis.entity.Avatar;
-import fr.esgi.avis.entity.AvatarEntity;
-import fr.esgi.avis.entity.UtilisateurEntity;
+import fr.esgi.avis.mapper.AvatarMapper;
+import fr.esgi.avis.mapper.AvisMapper;
 import fr.esgi.avis.mapper.UtilisateurMapper;
-import fr.esgi.avis.repository.AvatarEntityRepository;
-import fr.esgi.avis.repository.AvatarEntityRepository;
-import fr.esgi.avis.repository.UtilisateurEntityRepository;
-import fr.esgi.avis.repository.UtilisateurEntityRepository;
+import fr.esgi.avis.port.AvatarPort;
+import fr.esgi.avis.port.UtilisateurPort;
 import fr.esgi.avis.use_case.UtilisateurUseCase;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
 public class UtilisateurUseCaseImpl implements UtilisateurUseCase {
 
-    private final UtilisateurEntityRepository utilisateurRepository;
-    private final AvatarEntityRepository avatarRepository;
+    private final UtilisateurPort utilisateurPort;
+    private final AvatarPort avatarPort;
 
-    public UtilisateurUseCaseImpl(UtilisateurEntityRepository utilisateurRepository,
-                                  AvatarEntityRepository avatarRepository) {
-        this.utilisateurRepository = utilisateurRepository;
-        this.avatarRepository = avatarRepository;
+    public UtilisateurUseCaseImpl(UtilisateurPort utilisateurPort, AvatarPort avatarPort) {
+        this.utilisateurPort = utilisateurPort;
+        this.avatarPort = avatarPort;
     }
 
     @Override
     public UtilisateurDtoOut recupererUtilisateur(String email, String motDePasse) {
-        UtilisateurEntity utilisateur = utilisateurRepository
-                .findByEmailAndMotDePasse(email, motDePasse)
+        return utilisateurPort.findByEmailAndMotDePasse(email, motDePasse)
                 .orElseThrow(() -> new RuntimeException("Email ou mot de passe incorrect"));
-        return utilisateurMapper.toDto(utilisateur);
     }
 
     @Override
     public AvatarDtoOut choisirAvatar(UtilisateurDtoIn utilisateurDtoIn, AvatarDtoIn avatarDtoIn) {
-        UtilisateurEntity utilisateur = utilisateurRepository.findById(utilisateurDtoIn.id())
-                .orElseThrow(() -> new RuntimeException("Utilisateur introuvable : " + utilisateurDtoIn.id()));
+        UtilisateurDtoOut utilisateurDtoOut = utilisateurPort.findById(utilisateurDtoIn.getId())
+                .orElseThrow(() -> new RuntimeException("Utilisateur introuvable : " + utilisateurDtoIn.getId()));
 
-        AvatarEntity avatar = avatarRepository.findById(avatarDtoIn.id())
-                .orElseThrow(() -> new RuntimeException("Avatar introuvable : " + avatarDtoIn.id()));
+        AvatarDtoOut avatarDtoOut = avatarPort.findById(avatarDtoIn.getId())
+                .orElseThrow(() -> new RuntimeException("Avatar introuvable : " + avatarDtoIn.getId()));
 
-        utilisateur.setAvatar(avatar);
-        utilisateurRepository.save(utilisateur);
+        UtilisateurDtoIn dto = new UtilisateurDtoIn(
+                utilisateurDtoOut.getId(),
+                utilisateurDtoOut.getPseudo(),
+                utilisateurDtoOut.getEmail(),
+                utilisateurDtoOut.getMotDePasse(),
+                avatarDtoOut.getId(),
+                utilisateurDtoOut.getAviIds()
+        );
+        utilisateurPort.save(dto);
 
-        return avatarMapper.toDto(avatar);
+        return avatarDtoOut;
     }
 
     @Override
-    public List<AvisDtoOut> recupererAvisParUtilisateur(UtilisateurDtoIn utilisateurDtoIn) {
-        UtilisateurEntity utilisateur = utilisateurRepository.findById(utilisateurDtoIn.id())
-                .orElseThrow(() -> new RuntimeException("Utilisateur introuvable : " + utilisateurDtoIn.id()));
-
-        return utilisateur.getAvis()
+    public List<Long> recupererAvisParUtilisateur(UtilisateurDtoIn utilisateurDtoIn) {
+        return utilisateurPort.findById(utilisateurDtoIn.getId())
+                .orElseThrow(() -> new RuntimeException("Utilisateur introuvable : " + utilisateurDtoIn.getId()))
+                .getAviIds()
                 .stream()
-                .map(avisMapper::toDto)
                 .toList();
     }
 }

@@ -6,55 +6,47 @@ import fr.esgi.avis.dto.JeuDtoIn;
 import fr.esgi.avis.dto.JeuDtoOut;
 import fr.esgi.avis.mapper.AvisMapper;
 import fr.esgi.avis.mapper.JeuMapper;
-import fr.esgi.avis.repository.AvisEntityRepository;
-import fr.esgi.avis.repository.JeuEntityRepository;
+import fr.esgi.avis.port.AvisPort;
+import fr.esgi.avis.port.JeuPort;
 import fr.esgi.avis.use_case.JeuUseCase;
 import jakarta.persistence.EntityNotFoundException;
 
 import java.util.List;
 
 public class JeuUseCaseImpl implements JeuUseCase {
-    private JeuEntityRepository jeuEntityRepository;
-    private AvisEntityRepository avisEntityRepository;
-    private JeuMapper jeuMapper;
-    private AvisMapper avisMapper;
 
-    public JeuUseCaseImpl(JeuEntityRepository jeuEntityRepository, AvisEntityRepository avisEntityRepository, JeuMapper jeuMapper, AvisMapper avisMapper) {
-        this.jeuEntityRepository = jeuEntityRepository;
-        this.avisEntityRepository = avisEntityRepository;
-        this.jeuMapper = jeuMapper;
-        this.avisMapper = avisMapper;
+    private final JeuPort jeuPort;   // ✅ plus de repository
+    private final AvisPort avisPort; // ✅ plus de repository
+
+    public JeuUseCaseImpl(JeuPort jeuPort, AvisPort avisPort) {
+        this.jeuPort = jeuPort;
+        this.avisPort = avisPort;
     }
 
     @Override
     public List<JeuDtoOut> recupererJeux() {
-        return jeuEntityRepository.findAll()
+        return jeuPort.findAll()
                 .stream()
-                .map(JeuMapper::toJeuDtoOut)
                 .toList();
     }
 
     @Override
     public JeuDtoOut recupererJeu(Long id) {
-        return jeuEntityRepository.findById(id)
-                .map(jeuMapper::toDto)
+        return jeuPort.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Jeu non trouvé avec l'id : " + id));
     }
 
     @Override
     public List<JeuDtoOut> recupererParNom(String nom) {
-        return jeuEntityRepository.findByNomContainingIgnoreCase(nom)
+        return jeuPort.findByNomContainingIgnoreCase(nom)
                 .stream()
-                .map(jeuMapper::toDto)
                 .toList();
     }
 
     @Override
-    public List<AvisDtoOut> recupererAvisPourUnJeu(JeuDtoIn jeu) {
-        Jeu jeuMapper = jeuMapper.toEntity(jeu);
-        return avisEntityRepository.findByJeu(jeuMapper)
+    public List<AvisDtoOut> recupererAvisPourUnJeu(JeuDtoIn jeuDtoIn) {
+        return avisPort.findByJeu(jeuDtoIn)
                 .stream()
-                .map(avisMapper::toDto)
                 .toList();
     }
 }

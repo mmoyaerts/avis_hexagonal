@@ -6,5 +6,5 @@ import fr.esgi.avis.dto.PlateformeDtoIn;
 import java.util.List;
 
 public interface PlateformeUseCase {
-    List<JeuDtoOut> recupererJeuParPlateforme(PlateformeDtoIn plateforme);
+    List<Long> recupererJeuParPlateforme(PlateformeDtoIn plateforme);
 }

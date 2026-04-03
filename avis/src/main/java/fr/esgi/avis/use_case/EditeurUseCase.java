@@ -7,7 +7,7 @@ import fr.esgi.avis.dto.JeuDtoOut;
 import java.util.List;
 
 public interface EditeurUseCase {
-    List<JeuDtoOut> recuperJeuxParEditeur(EditeurDtoIn editeur);
+    List<Long> recuperJeuxParEditeur(EditeurDtoIn editeur);
 
     List<EditeurDtoOut> recuperEditeurs();
 

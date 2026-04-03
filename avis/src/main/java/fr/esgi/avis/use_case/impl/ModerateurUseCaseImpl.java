@@ -9,61 +9,48 @@ import fr.esgi.avis.mapper.AvisMapper;
 import fr.esgi.avis.mapper.EditeurMapper;
 import fr.esgi.avis.mapper.JeuMapper;
 import fr.esgi.avis.mapper.ModerateurMapper;
-import fr.esgi.avis.repository.AvisEntityRepository;
-import fr.esgi.avis.repository.EditeurEntityRepository;
-import fr.esgi.avis.repository.JeuEntityRepository;
-import fr.esgi.avis.repository.ModerateurEntityRepository;
+import fr.esgi.avis.port.AvisPort;
+import fr.esgi.avis.port.EditeurPort;
+import fr.esgi.avis.port.JeuPort;
 import fr.esgi.avis.use_case.ModerateurUseCase;
-import jakarta.persistence.EntityNotFoundException;
 
 public class ModerateurUseCaseImpl implements ModerateurUseCase {
 
-    private final AvisEntityRepository avisEntityRepository;
-    private final JeuEntityRepository jeuEntityRepository;
-    private final EditeurEntityRepository editeurEntityRepository;
-    private final ModerateurEntityRepository moderateurEntityRepository;
-    private final AvisMapper avisMapper;
-    private final JeuMapper jeuMapper;
-    private final EditeurMapper editeurMapper;
-    private final ModerateurMapper moderateurMapper;
+    private final AvisPort avisPort;           // ✅ plus de repository
+    private final JeuPort jeuPort;             // ✅ plus de repository
+    private final EditeurPort editeurPort;     // ✅ plus de repository
 
     public ModerateurUseCaseImpl(
-            AvisEntityRepository avisEntityRepository,
-            JeuEntityRepository jeuEntityRepository,
-            EditeurEntityRepository editeurEntityRepository,
-            ModerateurEntityRepository moderateurEntityRepository,
-            AvisMapper avisMapper,
-            JeuMapper jeuMapper,
-            EditeurMapper editeurMapper,
-            ModerateurMapper moderateurMapper
+            AvisPort avisPort,
+            JeuPort jeuPort,
+            EditeurPort editeurPort
     ) {
-        this.avisEntityRepository = avisEntityRepository;
-        this.jeuEntityRepository = jeuEntityRepository;
-        this.editeurEntityRepository = editeurEntityRepository;
-        this.moderateurEntityRepository = moderateurEntityRepository;
-        this.avisMapper = avisMapper;
-        this.jeuMapper = jeuMapper;
-        this.editeurMapper = editeurMapper;
-        this.moderateurMapper = moderateurMapper;
+        this.avisPort = avisPort;
+        this.jeuPort = jeuPort;
+        this.editeurPort = editeurPort;
     }
 
     @Override
     public AvisDtoOut modererAvis(AvisDtoIn avisDtoIn, ModerateurDtoIn moderateurDtoIn) {
-        Avis avis = AvisMapper.toAvis(avisDtoIn);
-        Moderateur moderateur = ModerateurMapper.toModerateur(moderateurDtoIn);
-        avis.setModerateur(moderateur);
-        return AvisMapper.toAvis(avisEntityRepository.save(avis));
+        AvisDtoIn avisDto = new AvisDtoIn(
+                avisDtoIn.getId(),
+                avisDtoIn.getDescription(),
+                avisDtoIn.getDateDeCreation(),
+                avisDtoIn.getNote(),
+                avisDtoIn.getJeuId(),
+                avisDtoIn.getJoueurId(),
+                moderateurDtoIn.getId()
+        );
+        return avisPort.save(avisDto);
     }
 
     @Override
     public JeuDtoOut ajouterJeu(JeuDtoIn jeuDtoIn) {
-        Jeu jeu = JeuMapper.toJeu(jeuDtoIn);
-        return JeuMapper.toJeuDtoOut(jeuEntityRepository.save(jeu));
+        return jeuPort.save(jeuDtoIn);
     }
 
     @Override
     public EditeurDtoOut creerEditeur(EditeurDtoIn editeurDtoIn) {
-        Editeur editeur = EditeurMapper.toEditeur(editeurDtoIn);
-        return EditeurMapper.toEditeurDtoOut(editeurEntityRepository.save(editeur));
+        return editeurPort.save(editeurDtoIn);
     }
 }
