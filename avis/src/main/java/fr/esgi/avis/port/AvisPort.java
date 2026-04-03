@@ -12,4 +12,5 @@ public interface AvisPort {
     List<AvisDtoOut> findByJeu(JeuDtoIn jeuDtoIn);
     AvisDtoOut save(AvisDtoIn avisDtoIn);
     List<AvisDtoOut> findByUser(UtilisateurDtoIn  userDtoIn);
+    void deleteById(Long id);
 }

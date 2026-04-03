@@ -45,6 +45,11 @@ public class AvisPortImpl implements AvisPort {
                 .toList();
     }
 
+    @Override
+    public void deleteById(Long id) {
+        avisEntityRepository.deleteById(id);
+    }
+
 
     @Override
     public AvisDtoOut save(AvisDtoIn avisDtoIn) {

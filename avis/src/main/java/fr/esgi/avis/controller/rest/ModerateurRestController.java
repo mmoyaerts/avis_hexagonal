@@ -32,6 +32,7 @@ public class ModerateurRestController{
 
     @PostMapping("/jeux")
     @Operation(summary = "Ajouter un nouveau jeu")
+    @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<JeuDtoOut> ajouterJeu(@RequestBody JeuDtoIn jeuDtoIn) {
         return ResponseEntity
                 .status(HttpStatus.CREATED)
@@ -40,6 +41,7 @@ public class ModerateurRestController{
 
     @PostMapping("/editeurs")
     @Operation(summary = "Créer un nouvel éditeur")
+    @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<EditeurDtoOut> creerEditeur(@RequestBody EditeurDtoIn editeurDtoIn) {
         return ResponseEntity
                 .status(HttpStatus.CREATED)

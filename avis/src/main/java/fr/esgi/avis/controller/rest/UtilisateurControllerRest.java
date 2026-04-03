@@ -8,6 +8,7 @@ import fr.esgi.avis.repository.UtilisateurEntityRepository;
 import fr.esgi.avis.use_case.UtilisateurUseCase;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,6 +28,7 @@ public class UtilisateurControllerRest {
     // 🔐 LOGIN
     @PostMapping("/login")
     @Operation(summary = "Connexion")
+    @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<UtilisateurDtoOut> login(@RequestBody LoginDtoIn loginDtoIn) {
         return ResponseEntity.ok(
                 utilisateurUseCase.recupererUtilisateur(loginDtoIn.email(), loginDtoIn.motDePasse())
