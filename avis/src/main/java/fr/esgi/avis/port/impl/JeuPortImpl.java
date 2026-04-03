@@ -6,10 +6,12 @@ import fr.esgi.avis.dto.JeuDtoOut;
 import fr.esgi.avis.mapper.JeuMapper;
 import fr.esgi.avis.port.JeuPort;
 import fr.esgi.avis.repository.JeuEntityRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
 
+@Repository
 public class JeuPortImpl implements JeuPort {
 
     private final JeuEntityRepository jeuEntityRepository;

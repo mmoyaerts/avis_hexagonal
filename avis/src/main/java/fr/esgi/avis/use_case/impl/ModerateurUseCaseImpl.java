@@ -13,7 +13,9 @@ import fr.esgi.avis.port.AvisPort;
 import fr.esgi.avis.port.EditeurPort;
 import fr.esgi.avis.port.JeuPort;
 import fr.esgi.avis.use_case.ModerateurUseCase;
+import org.springframework.stereotype.Service;
 
+@Service
 public class ModerateurUseCaseImpl implements ModerateurUseCase {
 
     private final AvisPort avisPort;           // ✅ plus de repository

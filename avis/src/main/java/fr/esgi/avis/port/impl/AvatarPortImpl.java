@@ -5,9 +5,11 @@ import fr.esgi.avis.dto.AvatarDtoOut;
 import fr.esgi.avis.mapper.AvatarMapper;
 import fr.esgi.avis.port.AvatarPort;
 import fr.esgi.avis.repository.AvatarEntityRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
+@Repository
 public class AvatarPortImpl implements AvatarPort {
 
     private final AvatarEntityRepository avatarEntityRepository;

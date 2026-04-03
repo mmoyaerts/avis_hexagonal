@@ -8,10 +8,12 @@ import fr.esgi.avis.mapper.AvisMapper;
 import fr.esgi.avis.mapper.JeuMapper;
 import fr.esgi.avis.port.AvisPort;
 import fr.esgi.avis.repository.AvisEntityRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
 
+@Repository
 public class AvisPortImpl implements AvisPort {
 
     private final AvisEntityRepository avisEntityRepository;

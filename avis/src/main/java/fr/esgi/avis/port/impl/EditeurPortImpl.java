@@ -6,10 +6,12 @@ import fr.esgi.avis.dto.EditeurDtoOut;
 import fr.esgi.avis.mapper.EditeurMapper;
 import fr.esgi.avis.port.EditeurPort;
 import fr.esgi.avis.repository.EditeurEntityRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
 
+@Repository
 public class EditeurPortImpl implements EditeurPort {
 
     private final EditeurEntityRepository editeurEntityRepository;

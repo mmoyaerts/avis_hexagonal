@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class UtilisateurUseCaseImpl implements UtilisateurUseCase {
 
     private final UtilisateurPort utilisateurPort;

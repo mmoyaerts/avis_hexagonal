@@ -6,9 +6,11 @@ import fr.esgi.avis.dto.PlateformeDtoOut;
 import fr.esgi.avis.mapper.PlateformeMapper;
 import fr.esgi.avis.port.PlateformePort;
 import fr.esgi.avis.repository.PlateformeEntityRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
+@Repository
 public class PlateformePortImpl implements PlateformePort {
 
     private final PlateformeEntityRepository plateformeEntityRepository;

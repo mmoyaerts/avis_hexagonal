@@ -6,9 +6,11 @@ import fr.esgi.avis.dto.UtilisateurDtoOut;
 import fr.esgi.avis.mapper.UtilisateurMapper;
 import fr.esgi.avis.port.UtilisateurPort;
 import fr.esgi.avis.repository.UtilisateurEntityRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
+@Repository
 public class UtilisateurPortImpl implements UtilisateurPort {
 
     private final UtilisateurEntityRepository utilisateurEntityRepository;

@@ -6,9 +6,11 @@ import fr.esgi.avis.dto.JoueurDtoOut;
 import fr.esgi.avis.mapper.JoueurMapper;
 import fr.esgi.avis.port.JoueurPort;
 import fr.esgi.avis.repository.JoueurEntityRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
+@Repository
 public class JoueurPortImpl implements JoueurPort {
 
     private final JoueurEntityRepository joueurEntityRepository;

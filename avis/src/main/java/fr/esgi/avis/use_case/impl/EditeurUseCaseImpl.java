@@ -5,9 +5,11 @@ import fr.esgi.avis.dto.EditeurDtoOut;
 import fr.esgi.avis.dto.JeuDtoOut;
 import fr.esgi.avis.port.EditeurPort;
 import fr.esgi.avis.use_case.EditeurUseCase;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class EditeurUseCaseImpl implements EditeurUseCase {
 
     private final EditeurPort editeurPort;

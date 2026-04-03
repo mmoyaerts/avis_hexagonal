@@ -10,9 +10,11 @@ import fr.esgi.avis.port.AvisPort;
 import fr.esgi.avis.port.JeuPort;
 import fr.esgi.avis.use_case.JeuUseCase;
 import jakarta.persistence.EntityNotFoundException;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class JeuUseCaseImpl implements JeuUseCase {
 
     private final JeuPort jeuPort;   // ✅ plus de repository

@@ -12,6 +12,7 @@ import fr.esgi.avis.port.JoueurPort;
 import fr.esgi.avis.use_case.JoueurUseCase;
 import org.springframework.stereotype.Service;
 
+@Service
 public class JoueurUseCaseImpl implements JoueurUseCase {
 
     private final JoueurPort joueurPort; // ✅ plus de repository
