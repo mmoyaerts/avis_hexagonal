@@ -6,8 +6,8 @@ import fr.esgi.avis.dto.EditeurDtoOut;
 import fr.esgi.avis.entity.EditeurEntity;
 import fr.esgi.avis.entity.JeuEntity;
 
-import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 public class EditeurMapper {
 
@@ -29,9 +29,9 @@ public class EditeurMapper {
                 editeur.getId(),
                 editeur.getNom(),
                 editeur.getLogo(),
-                editeur.getJeux()
+                Objects.requireNonNullElse(editeur.getJeux(), List.<JeuEntity>of()) // ✅ null-safe + type explicite
                         .stream()
-                        .map(JeuEntity::getId)
+                        .map(JeuEntity::getId)                                    // ✅ lambda
                         .toList()
         );
     }

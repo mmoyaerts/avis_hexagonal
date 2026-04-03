@@ -7,8 +7,8 @@ import fr.esgi.avis.entity.AvisEntity;
 import fr.esgi.avis.entity.JeuEntity;
 import fr.esgi.avis.entity.PlateformeEntity;
 
-import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 public class JeuMapper {
 
@@ -35,17 +35,17 @@ public class JeuMapper {
                 jeu.getDateDeSortie(),
                 jeu.getDescription(),
                 jeu.getEditeur() != null ? jeu.getEditeur().getId() : null,
-                jeu.getPlateformes()
+                Objects.requireNonNullElse(jeu.getPlateformes(), List.<PlateformeEntity>of()) // ✅ type explicite
                         .stream()
-                        .map(PlateformeEntity::getId)
+                        .map(PlateformeEntity::getId)                                 // ✅ lambda
                         .toList(),
                 jeu.getGenre() != null ? jeu.getGenre().getId() : null,
                 jeu.getImage(),
                 jeu.getPrix(),
                 jeu.getClassification() != null ? jeu.getClassification().getId() : null,
-                jeu.getAvis()
+                Objects.requireNonNullElse(jeu.getAvis(), List.<AvisEntity>of())              // ✅ type explicite
                         .stream()
-                        .map(AvisEntity::getId)
+                        .map(AvisEntity::getId)                                             // ✅ lambda
                         .toList()
         );
     }
