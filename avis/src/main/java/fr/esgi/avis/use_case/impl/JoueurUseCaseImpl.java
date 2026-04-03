@@ -32,7 +32,7 @@ public class JoueurUseCaseImpl implements JoueurUseCase {
             throw new RuntimeException("Un joueur avec cet email existe déjà : " + joueurDtoIn.email());
         }
 
-        JoueurEntity joueurEntity = joueurMapper.toEntity(joueurDtoIn);
+        JoueurEntity joueurEntity = JoueurMapper.toJoueur(joueurDtoIn);
         JoueurEntity saved = joueurRepository.save(joueurEntity);
         return JoueurMapper.toJoueurDtoOut(saved);
     }

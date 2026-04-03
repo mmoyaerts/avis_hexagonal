@@ -49,21 +49,21 @@ public class ModerateurUseCaseImpl implements ModerateurUseCase {
 
     @Override
     public AvisDtoOut modererAvis(AvisDtoIn avisDtoIn, ModerateurDtoIn moderateurDtoIn) {
-        Avis avis = avisMapper.toEntity(avisDtoIn);
-        Moderateur moderateur = moderateurMapper.toEntity(moderateurDtoIn);
+        Avis avis = AvisMapper.toAvis(avisDtoIn);
+        Moderateur moderateur = ModerateurMapper.toModerateur(moderateurDtoIn);
         avis.setModerateur(moderateur);
-        return avisMapper.toDto(avisEntityRepository.save(avis));
+        return AvisMapper.toAvis(avisEntityRepository.save(avis));
     }
 
     @Override
     public JeuDtoOut ajouterJeu(JeuDtoIn jeuDtoIn) {
-        Jeu jeu = jeuMapper.toEntity(jeuDtoIn);
-        return jeuMapper.toDto(jeuEntityRepository.save(jeu));
+        Jeu jeu = JeuMapper.toJeu(jeuDtoIn);
+        return JeuMapper.toJeuDtoOut(jeuEntityRepository.save(jeu));
     }
 
     @Override
     public EditeurDtoOut creerEditeur(EditeurDtoIn editeurDtoIn) {
-        Editeur editeur = editeurMapper.toEntity(editeurDtoIn);
-        return editeurMapper.toDto(editeurEntityRepository.save(editeur));
+        Editeur editeur = EditeurMapper.toEditeur(editeurDtoIn);
+        return EditeurMapper.toEditeurDtoOut(editeurEntityRepository.save(editeur));
     }
 }

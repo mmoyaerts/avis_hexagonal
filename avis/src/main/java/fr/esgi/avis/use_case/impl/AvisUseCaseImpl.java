@@ -21,6 +21,6 @@ public class AvisUseCaseImpl implements AvisUseCase {
     public AvisDtoOut recuperUnAvis(Long id) {
         Avis avis = avisEntityRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Avis non trouvé avec l'id : " + id));
-        return avisMapper.toDto(avis);
+        return AvisMapper.toAvisDtoOut(avis);
     }
 }

@@ -5,13 +5,12 @@ import fr.esgi.avis.business.Utilisateur;
 import fr.esgi.avis.dto.*;
 import fr.esgi.avis.entity.Avatar;
 import fr.esgi.avis.entity.AvatarEntity;
-import fr.esgi.avis.entity.Utilisateur;
 import fr.esgi.avis.entity.UtilisateurEntity;
 import fr.esgi.avis.mapper.UtilisateurMapper;
 import fr.esgi.avis.repository.AvatarEntityRepository;
-import fr.esgi.avis.repository.AvatarRepository;
+import fr.esgi.avis.repository.AvatarEntityRepository;
 import fr.esgi.avis.repository.UtilisateurEntityRepository;
-import fr.esgi.avis.repository.UtilisateurRepository;
+import fr.esgi.avis.repository.UtilisateurEntityRepository;
 import fr.esgi.avis.use_case.UtilisateurUseCase;
 import org.springframework.stereotype.Service;
 
@@ -34,7 +33,6 @@ public class UtilisateurUseCaseImpl implements UtilisateurUseCase {
         UtilisateurEntity utilisateur = utilisateurRepository
                 .findByEmailAndMotDePasse(email, motDePasse)
                 .orElseThrow(() -> new RuntimeException("Email ou mot de passe incorrect"));
-
         return utilisateurMapper.toDto(utilisateur);
     }
 
