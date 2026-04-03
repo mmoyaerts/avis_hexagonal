@@ -18,7 +18,7 @@ public class AvisPortImpl implements AvisPort {
 
     private final AvisEntityRepository avisEntityRepository;
 
-    public AvisPortImpl(AvisEntityRepository avisEntityRepository, AvisMapper avisMapper) {
+    public AvisPortImpl(AvisEntityRepository avisEntityRepository) {
         this.avisEntityRepository = avisEntityRepository;
     }
 
