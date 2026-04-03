@@ -21,7 +21,8 @@ public class DataInitializer {
             EditeurEntityRepository editeurRepo,
             ClassificationEntityRepository classificationRepo,
             PlateformeEntityRepository plateformeRepo,
-            AvisEntityRepository avisRepo
+            AvisEntityRepository avisRepo,
+            ModerateurEntityRepository moderateurRepo
     ) {
         return args -> {
 
@@ -49,7 +50,13 @@ public class DataInitializer {
             user2.setMotDePasse("1234");
             user2.setAvatar(avatar2);
 
+            ModerateurEntity moderateur = new ModerateurEntity();
+            moderateur.setPseudo("modo1");
+            moderateur.setEmail("modo@gmail.com");
+            moderateur.setMotDePasse("1234");
+
             userRepo.saveAll(List.of(user1, user2));
+            moderateurRepo.save(moderateur);
 
             // 🎮 GENRE
             GenreEntity genre = new GenreEntity();

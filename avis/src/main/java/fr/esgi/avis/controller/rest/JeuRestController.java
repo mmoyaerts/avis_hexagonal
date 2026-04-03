@@ -4,6 +4,7 @@ import fr.esgi.avis.controller.JeuController;
 import fr.esgi.avis.dto.AvisDtoOut;
 import fr.esgi.avis.dto.JeuDtoIn;
 import fr.esgi.avis.dto.JeuDtoOut;
+import fr.esgi.avis.mapper.JeuMapper;
 import fr.esgi.avis.use_case.JeuUseCase;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -41,9 +42,11 @@ public class JeuRestController {
         return ResponseEntity.ok(jeuUseCase.recupererParNom(nom));
     }
 
-    @PostMapping("/avis")
+    @GetMapping("/{id}/avis")
     @Operation(summary = "Récupérer les avis pour un jeu")
-    public ResponseEntity<List<AvisDtoOut>> recupererAvisPourUnJeu(@RequestBody JeuDtoIn jeuDtoIn) {
+    public ResponseEntity<List<AvisDtoOut>> recupererAvisPourUnJeu(@PathVariable Long id) {
+        JeuDtoOut jeuDtoOut = jeuUseCase.recupererJeu(id);
+        JeuDtoIn jeuDtoIn = JeuMapper.toDtoInt(jeuDtoOut);
         return ResponseEntity.ok(jeuUseCase.recupererAvisPourUnJeu(jeuDtoIn));
     }
 }

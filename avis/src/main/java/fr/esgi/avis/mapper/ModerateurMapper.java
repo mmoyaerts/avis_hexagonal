@@ -6,8 +6,8 @@ import fr.esgi.avis.dto.ModerateurDtoOut;
 import fr.esgi.avis.entity.AvisEntity;
 import fr.esgi.avis.entity.ModerateurEntity;
 
-import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 public class ModerateurMapper {
 
@@ -33,8 +33,8 @@ public class ModerateurMapper {
                 dto.getPseudo(),
                 dto.getEmail(),
                 dto.getMotDePasse(),
-                dto.getAvatar().getId(),
-                dto.getAvis()
+                dto.getAvatar() != null ? dto.getAvatar().getId() : null, // ✅ null-safe avatarId
+                Objects.requireNonNullElse(dto.getAvis(), List.<AvisEntity>of()) // ✅ null-safe liste
                         .stream()
                         .map(AvisEntity::getId)
                         .toList()
@@ -54,5 +54,4 @@ public class ModerateurMapper {
                 dto.getAviIds()
         );
     }
-
 }

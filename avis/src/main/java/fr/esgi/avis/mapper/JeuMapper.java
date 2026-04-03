@@ -49,4 +49,22 @@ public class JeuMapper {
                         .toList()
         );
     }
+
+    public static JeuDtoIn toDtoInt(JeuDtoOut jeu) {
+        if (jeu == null) return null;
+
+        return new JeuDtoIn(
+                jeu.getId(),
+                jeu.getNom(),
+                jeu.getDateDeSortie(),
+                jeu.getDescription(),
+                jeu.getEditeurId() != null ? jeu.getEditeurId() : null,
+                jeu.getPlateformeIds() != null ? jeu.getPlateformeIds() : null,
+                jeu.getGenreId() != null ? jeu.getGenreId() : null,
+                jeu.getImage(),
+                jeu.getPrix(),
+                jeu.getClassificationId() != null ? jeu.getClassificationId() : null,
+                jeu.getAviIds() != null ? jeu.getAviIds() : null
+        );
+    }
 }
