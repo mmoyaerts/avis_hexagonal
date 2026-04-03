@@ -1,4 +1,4 @@
-package fr.esgi.avis.adapter;
+package fr.esgi.avis.port.impl;
 
 import fr.esgi.avis.business.Avis;
 import fr.esgi.avis.dto.AvisDtoIn;
