@@ -11,5 +11,5 @@ public interface UtilisateurUseCase {
 
     AvatarDtoOut choisirAvatar(UtilisateurDtoIn utilisateur, AvatarDtoIn avatar);
 
-    List<Long> recupererAvisParUtilisateur(UtilisateurDtoIn utilisateur);
+    List<AvisDtoOut> recupererAvisParUtilisateur(UtilisateurDtoIn utilisateur);
 }

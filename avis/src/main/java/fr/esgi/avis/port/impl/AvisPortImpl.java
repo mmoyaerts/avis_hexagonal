@@ -4,8 +4,10 @@ import fr.esgi.avis.business.Avis;
 import fr.esgi.avis.dto.AvisDtoIn;
 import fr.esgi.avis.dto.AvisDtoOut;
 import fr.esgi.avis.dto.JeuDtoIn;
+import fr.esgi.avis.dto.UtilisateurDtoIn;
 import fr.esgi.avis.mapper.AvisMapper;
 import fr.esgi.avis.mapper.JeuMapper;
+import fr.esgi.avis.mapper.UtilisateurMapper;
 import fr.esgi.avis.port.AvisPort;
 import fr.esgi.avis.repository.AvisEntityRepository;
 import org.springframework.stereotype.Repository;
@@ -35,6 +37,14 @@ public class AvisPortImpl implements AvisPort {
                 .map(AvisMapper::toAvisDtoOut)
                 .toList();
     }
+
+    public List<AvisDtoOut> findByUser(UtilisateurDtoIn userDtoIn) {
+        return avisEntityRepository.findByJoueurId(UtilisateurMapper.toEntity(userDtoIn).getId())
+                .stream()
+                .map(AvisMapper::toAvisDtoOut)
+                .toList();
+    }
+
 
     @Override
     public AvisDtoOut save(AvisDtoIn avisDtoIn) {

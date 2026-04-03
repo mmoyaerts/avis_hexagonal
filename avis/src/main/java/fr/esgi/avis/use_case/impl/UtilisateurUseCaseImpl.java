@@ -7,6 +7,7 @@ import fr.esgi.avis.mapper.AvatarMapper;
 import fr.esgi.avis.mapper.AvisMapper;
 import fr.esgi.avis.mapper.UtilisateurMapper;
 import fr.esgi.avis.port.AvatarPort;
+import fr.esgi.avis.port.AvisPort;
 import fr.esgi.avis.port.UtilisateurPort;
 import fr.esgi.avis.use_case.UtilisateurUseCase;
 import org.springframework.stereotype.Service;
@@ -18,10 +19,12 @@ public class UtilisateurUseCaseImpl implements UtilisateurUseCase {
 
     private final UtilisateurPort utilisateurPort;
     private final AvatarPort avatarPort;
+    private final AvisPort avisPort;
 
-    public UtilisateurUseCaseImpl(UtilisateurPort utilisateurPort, AvatarPort avatarPort) {
+    public UtilisateurUseCaseImpl(UtilisateurPort utilisateurPort, AvatarPort avatarPort, AvisPort avisPort) {
         this.utilisateurPort = utilisateurPort;
         this.avatarPort = avatarPort;
+        this.avisPort = avisPort;
     }
 
     @Override
@@ -58,10 +61,8 @@ public class UtilisateurUseCaseImpl implements UtilisateurUseCase {
     }
 
     @Override
-    public List<Long> recupererAvisParUtilisateur(UtilisateurDtoIn utilisateurDtoIn) {
-        return utilisateurPort.findById(utilisateurDtoIn.getId())
-                .orElseThrow(() -> new RuntimeException("Utilisateur introuvable : " + utilisateurDtoIn.getId()))
-                .getAviIds()
+    public List<AvisDtoOut> recupererAvisParUtilisateur(UtilisateurDtoIn utilisateurDtoIn) {
+        return avisPort.findByUser(utilisateurDtoIn)
                 .stream()
                 .toList();
     }
