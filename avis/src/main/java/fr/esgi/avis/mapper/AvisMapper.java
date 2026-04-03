@@ -1,12 +1,12 @@
 package fr.esgi.avis.mapper;
 
-import fr.esgi.avis.business.Avis;
 import fr.esgi.avis.dto.AvisDtoIn;
 import fr.esgi.avis.dto.AvisDtoOut;
+import fr.esgi.avis.entity.AvisEntity;
 
 public class AvisMapper {
 
-    public static AvisDtoOut toAvisDtoOut(Avis avis) {
+    public static AvisDtoOut toAvisDtoOut(AvisEntity avis) {
         return new AvisDtoOut(
                 avis.getId(),
                 avis.getDescription(),
@@ -18,13 +18,14 @@ public class AvisMapper {
         );
     }
 
-    public static Avis toAvis(AvisDtoIn avisDtoIn) {
-        Avis avis = new Avis();
+    public static AvisEntity toAvisEntity(AvisDtoIn avisDtoIn) {
+        AvisEntity avis = new AvisEntity();
         avis.setId(avisDtoIn.getId());
         avis.setDescription(avisDtoIn.getDescription());
         avis.setDateDeCreation(avisDtoIn.getDateDeCreation());
         avis.setNote(avisDtoIn.getNote());
-        // jeu, joueur, moderateur → récupérés via leurs repositories dans le use case
+
+        // ⚠️ relations gérées ailleurs (use case)
         return avis;
     }
 }

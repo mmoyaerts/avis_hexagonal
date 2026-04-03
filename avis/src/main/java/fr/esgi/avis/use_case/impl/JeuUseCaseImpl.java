@@ -30,7 +30,7 @@ public class JeuUseCaseImpl implements JeuUseCase {
     public List<JeuDtoOut> recupererJeux() {
         return jeuEntityRepository.findAll()
                 .stream()
-                .map(jeuMapper::toDto)
+                .map(JeuMapper::toJeuDtoOut)
                 .toList();
     }
 
