@@ -10,4 +10,5 @@ public interface ModerateurUseCase {
 
     EditeurDtoOut creerEditeur(EditeurDtoIn editeur);
 
+    ModerateurDtoOut recupererModerateur(Long id);
 }
