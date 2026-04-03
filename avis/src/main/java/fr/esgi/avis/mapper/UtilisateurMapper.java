@@ -34,4 +34,17 @@ public class UtilisateurMapper {
                         .map(AvisEntity::getId)
                         .toList());
     }
+
+    public static UtilisateurDtoIn toDtoIn(UtilisateurDtoOut user) {
+        if (user == null) return null;
+        return new UtilisateurDtoIn(
+                user.getId(),
+                user.getPseudo(),
+                user.getEmail(),
+                user.getMotDePasse(),
+                user.getAvatarId(),
+                user.getAviIds()
+        );
+
+    }
 }

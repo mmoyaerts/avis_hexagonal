@@ -31,6 +31,12 @@ public class UtilisateurUseCaseImpl implements UtilisateurUseCase {
     }
 
     @Override
+    public UtilisateurDtoOut recupererUtilisateurbyId(Long id) {
+        return utilisateurPort.findById(id)
+                .orElseThrow(() -> new RuntimeException("Email ou mot de passe incorrect"));
+    }
+
+    @Override
     public AvatarDtoOut choisirAvatar(UtilisateurDtoIn utilisateurDtoIn, AvatarDtoIn avatarDtoIn) {
         UtilisateurDtoOut utilisateurDtoOut = utilisateurPort.findById(utilisateurDtoIn.getId())
                 .orElseThrow(() -> new RuntimeException("Utilisateur introuvable : " + utilisateurDtoIn.getId()));

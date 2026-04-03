@@ -10,8 +10,6 @@ import java.util.List;
 
 @Data
 @NoArgsConstructor
-@RequiredArgsConstructor
-@EqualsAndHashCode(callSuper = true)
 public class Joueur extends Utilisateur{
     private LocalDate dateDeNaissance;
 }
