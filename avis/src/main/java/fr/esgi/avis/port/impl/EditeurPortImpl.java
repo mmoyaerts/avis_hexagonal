@@ -21,22 +21,22 @@ public class EditeurPortImpl implements EditeurPort {
     @Override
     public Optional<EditeurDtoOut> findById(Long id) {
         return editeurEntityRepository.findById(id)
-                .map(EditeurMapper::toEditeurDtoOut);
+                .map(EditeurMapper::toDtoOut);
     }
 
     @Override
     public List<EditeurDtoOut> findAll() {
         return editeurEntityRepository.findAll()
                 .stream()
-                .map(EditeurMapper::toEditeurDtoOut)
+                .map(EditeurMapper::toDtoOut)
                 .toList();
     }
 
     @Override
     public EditeurDtoOut save(EditeurDtoIn editeurDtoIn) {
-        return EditeurMapper.toEditeurDtoOut(
+        return EditeurMapper.toDtoOut(
                 editeurEntityRepository.save(
-                        EditeurMapper.toEditeurEntity(editeurDtoIn) // business → entity
+                        EditeurMapper.toEntity(editeurDtoIn) // business → entity
                 )
         );
     }

@@ -20,6 +20,6 @@ public class PlateformePortImpl implements PlateformePort {
     @Override
     public Optional<PlateformeDtoOut> findById(Long id) {
         return plateformeEntityRepository.findById(id)
-                .map(PlateformeMapper::toPlateformeDtoOut); // entity → business
+                .map(PlateformeMapper::toDtoOut); // entity → business
     }
 }

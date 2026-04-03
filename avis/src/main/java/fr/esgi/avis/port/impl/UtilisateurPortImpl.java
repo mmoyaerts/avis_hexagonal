@@ -20,20 +20,20 @@ public class UtilisateurPortImpl implements UtilisateurPort {
     @Override
     public Optional<UtilisateurDtoOut> findByEmailAndMotDePasse(String email, String motDePasse) {
         return utilisateurEntityRepository.findByEmailAndMotDePasse(email, motDePasse)
-                .map(UtilisateurMapper::toUtilisateurDtoOut); // entity → business
+                .map(UtilisateurMapper::toDtoOut); // entity → business
     }
 
     @Override
     public Optional<UtilisateurDtoOut> findById(Long id) {
         return utilisateurEntityRepository.findById(id)
-                .map(UtilisateurMapper::toUtilisateurDtoOut);
+                .map(UtilisateurMapper::toDtoOut);
     }
 
     @Override
     public UtilisateurDtoOut save(UtilisateurDtoIn utilisateurDtoIn) {
-        return UtilisateurMapper.toUtilisateurDtoOut(
+        return UtilisateurMapper.toDtoOut(
                 utilisateurEntityRepository.save(
-                        UtilisateurMapper.toUtilisateurEntity(utilisateurDtoIn) // business → entity
+                        UtilisateurMapper.toEntity(utilisateurDtoIn) // business → entity
                 )
         );
     }

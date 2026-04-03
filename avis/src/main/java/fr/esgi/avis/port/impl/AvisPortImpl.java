@@ -15,22 +15,20 @@ import java.util.Optional;
 public class AvisPortImpl implements AvisPort {
 
     private final AvisEntityRepository avisEntityRepository;
-    private final AvisMapper avisMapper;
 
     public AvisPortImpl(AvisEntityRepository avisEntityRepository, AvisMapper avisMapper) {
         this.avisEntityRepository = avisEntityRepository;
-        this.avisMapper = avisMapper;
     }
 
     @Override
     public Optional<AvisDtoOut> findById(Long id) {
         return avisEntityRepository.findById(id)
-                .map(avisMapper::toAvisDtoOut);
+                .map(AvisMapper::toAvisDtoOut);
     }
 
     @Override
     public List<AvisDtoOut> findByJeu(JeuDtoIn jeuDtoIn) {
-        return avisEntityRepository.findByJeu(JeuMapper.toJeuEntity(jeuDtoIn))
+        return avisEntityRepository.findByJeu(JeuMapper.toEntity(jeuDtoIn))
                 .stream()
                 .map(AvisMapper::toAvisDtoOut)
                 .toList();

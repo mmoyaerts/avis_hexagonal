@@ -24,9 +24,9 @@ public class JoueurPortImpl implements JoueurPort {
 
     @Override
     public JoueurDtoOut save(JoueurDtoIn joueurDtoIn) {
-        return JoueurMapper.toJoueurDtoOut(
+        return JoueurMapper.toDtoOut(
                 joueurEntityRepository.save(
-                        JoueurMapper.toJoueurEntity(joueurDtoIn)
+                        JoueurMapper.toEntity(joueurDtoIn)
                 )
         );
     }
@@ -34,6 +34,6 @@ public class JoueurPortImpl implements JoueurPort {
     @Override
     public Optional<JoueurDtoOut> findById(Long id) {
         return joueurEntityRepository.findById(id)
-                .map(JoueurMapper::toJoueurDtoOut);
+                .map(JoueurMapper::toDtoOut);
     }
 }

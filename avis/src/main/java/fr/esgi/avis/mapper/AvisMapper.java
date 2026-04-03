@@ -6,7 +6,7 @@ import fr.esgi.avis.entity.AvisEntity;
 
 public class AvisMapper {
 
-    public AvisDtoOut toAvisDtoOut(AvisEntity avis) {
+    public static AvisDtoOut toAvisDtoOut(AvisEntity avis) {
         return new AvisDtoOut(
                 avis.getId(),
                 avis.getDescription(),

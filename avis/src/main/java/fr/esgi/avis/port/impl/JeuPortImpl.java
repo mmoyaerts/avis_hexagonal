@@ -22,29 +22,29 @@ public class JeuPortImpl implements JeuPort {
     public List<JeuDtoOut> findAll() {
         return jeuEntityRepository.findAll()
                 .stream()
-                .map(JeuMapper::toJeuDtoOut) // entity → business
+                .map(JeuMapper::toDtoOut) // entity → business
                 .toList();
     }
 
     @Override
     public Optional<JeuDtoOut> findById(Long id) {
         return jeuEntityRepository.findById(id)
-                .map(JeuMapper::toJeuDtoOut);
+                .map(JeuMapper::toDtoOut);
     }
 
     @Override
     public List<JeuDtoOut> findByNomContainingIgnoreCase(String nom) {
         return jeuEntityRepository.findByNomContainingIgnoreCase(nom)
                 .stream()
-                .map(JeuMapper::toJeuDtoOut)
+                .map(JeuMapper::toDtoOut)
                 .toList();
     }
 
     @Override
     public JeuDtoOut save(JeuDtoIn jeuDtoIn) {
-        return JeuMapper.toJeuDtoOut(
+        return JeuMapper.toDtoOut(
                 jeuEntityRepository.save(
-                        JeuMapper.toJeuEntity(jeuDtoIn)
+                        JeuMapper.toEntity(jeuDtoIn)
                 )
         );
     }

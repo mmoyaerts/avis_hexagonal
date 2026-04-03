@@ -19,6 +19,6 @@ public class AvatarPortImpl implements AvatarPort {
     @Override
     public Optional<AvatarDtoOut> findById(Long id) {
         return avatarEntityRepository.findById(id)
-                .map(AvatarMapper::toAvatarDtoOut); // entity → business
+                .map(AvatarMapper::toDtoOut); // entity → business
     }
 }
