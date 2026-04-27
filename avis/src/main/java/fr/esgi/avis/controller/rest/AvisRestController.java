@@ -46,11 +46,4 @@ public class AvisRestController {
                 .status(HttpStatus.CREATED)
                 .body(joueurUseCase.redigerAvis(avis));
     }
-
-    @DeleteMapping("/{id}")
-    @Operation(summary = "Supprimer un avis à partir de son id")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void supprimerAvis(@PathVariable Long id){
-        moderateurUseCase.supprimerAvis(id);
-    }
 }
